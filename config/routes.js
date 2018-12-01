@@ -58,11 +58,12 @@ function login(req, res) {
     .first()
     .then(user => {
       if (user && bcrypt.compareSync(creds.password, user.password)) {
+        console.log("in here");
         const token = generateToken(user);
 
         res.status(200).json({ id: user.id, token });
       } else {
-        res.status(401().json({ message: "you shall not pass" }));
+        res.status(401).json({ message: "you shall not pass" });
       }
     });
 }
